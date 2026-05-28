@@ -1,0 +1,52 @@
+.rbc-calendar {
+    font-size: 12px;
+  }
+  
+  .rbc-month-view {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .rbc-month-row {
+    min-height: 60px !important; /* Compact cell height */
+  }
+  
+  .rbc-date-cell {
+    padding: 2px !important;
+    text-align: center;
+  }
+  
+  .rbc-day-bg {
+    height: 60px !important; /* Compact cell height */
+  }
+  
+  .rbc-event {
+    padding: 0 !important;
+    margin: 0 auto !important;
+    width: 16px !important;
+    height: 16px !important;
+    border-radius: 50% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+  
+  .rbc-event-content {
+    display: none; /* Hide event content (using dots instead) */
+  }
+  
+  .rbc-header {
+    background-color: #f7fafc;
+    padding: 8px !important;
+    font-weight: 600;
+    color: #2d3748;
+  }
+  
+  .rbc-today {
+    background-color: #e6fffa !important;
+  }
+  
+  .rbc-off-range-bg {
+    background-color: #edf2f7 !important;
+  }
