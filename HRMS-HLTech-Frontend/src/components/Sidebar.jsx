@@ -230,6 +230,7 @@ const Sidebar = ({
     {
       path: '/audit',
       icon: <AuditIcon />,
+
       label: 'Audit & Logs',
     },
     {

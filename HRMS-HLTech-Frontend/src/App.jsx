@@ -25,6 +25,9 @@ import Leave from "./pages/HrDashboard/Leave";
 import LeaveRequest from "./pages/EmployeeDashboard/LeaveRequest";
 import Payroll from "./pages/HrDashboard/Payroll";
 import Reports from "./pages/HrDashboard/Reports";
+import CompanySetting from "./pages/HrDashboard/CompanySetting";
+import AuditLogs from "./pages/HrDashboard/AuditLogs";
+import DataBackup from "./pages/HrDashboard/DataBackup";
 import ScanAttendance from "./pages/HrDashboard/ScanAttendance";
 import AttendanceSheet from "./pages/HrDashboard/AttendanceSheet";
 import JobPosting from "./pages/HrDashboard/JobPosting";
@@ -419,7 +422,7 @@ function App() {
               element={
                 user ? (
                   user.role === "admin" ? (
-                    <div>Company Settings Page (Placeholder)</div>
+                    <CompanySetting />
                   ) : (
                     <Navigate to="/dashboard/employee" replace />
                   )
@@ -433,7 +436,7 @@ function App() {
               element={
                 user ? (
                   user.role === "admin" ? (
-                    <div>Audit & Logs Page (Placeholder)</div>
+                    <AuditLogs />
                   ) : (
                     <Navigate to="/dashboard/employee" replace />
                   )
@@ -461,7 +464,7 @@ function App() {
               element={
                 user ? (
                   user.role === "admin" ? (
-                    <div>Data Backup & Export Page (Placeholder)</div>
+                    <DataBackup />
                   ) : (
                     <Navigate to="/dashboard/employee" replace />
                   )
