@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import toast from 'react-hot-toast';
+const API_URL = import.meta.env.VITE_API_URL;
 
 const AuthContext = createContext();
 
@@ -25,7 +26,7 @@ export const AuthProvider = ({ children }) => {
   // Fetch user profile from backend
   const fetchUserProfile = async (token) => {
     try {
-      const response = await fetch('http://localhost:5000/api/profile', {
+      const response = await fetch(`${API_URL}/api/profile`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -112,7 +113,7 @@ export const AuthProvider = ({ children }) => {
       };
       if (role) payload.role = role;
 
-      const response = await fetch('http://localhost:5000/api/auth/register', {
+      const response = await fetch(`${API_URL}/api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -168,7 +169,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password, isAdminHr) => {
     try {
       console.log('Login attempt:', { email, password, isAdminHr });
-      const endpoint = 'http://localhost:5000/api/auth/login';
+      const endpoint = `${API_URL}/api/auth/login`;
       console.log('Login endpoint:', endpoint);
 
       const response = await fetch(endpoint, {

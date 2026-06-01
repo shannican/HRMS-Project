@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+const API_URL = import.meta.env.VITE_API_URL;
 
 const AddEmployeeModal = ({ isAddModalOpen, setIsAddModalOpen, newEmployee, setNewEmployee, handleAddEmployee, isLoading, user }) => {
   // Fetch the next employee code when the modal opens
@@ -11,7 +12,7 @@ const AddEmployeeModal = ({ isAddModalOpen, setIsAddModalOpen, newEmployee, setN
           throw new Error('No authentication token found');
         }
 
-        const response = await fetch('http://localhost:5000/api/generate-employee-code', {
+        const response = await fetch(`${API_URL}/generate-employee-code`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },

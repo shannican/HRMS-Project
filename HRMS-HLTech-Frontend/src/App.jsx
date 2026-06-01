@@ -42,6 +42,7 @@ import NotificationAlert from "./pages/HrDashboard/Notification&Alert";
 import { Toaster } from "react-hot-toast";
 import toast from "react-hot-toast";
 import axios from "axios";
+const API_URL = import.meta.env.VITE_API_URL;
 
 function App() {
   const { user, isLoading } = useAuth();
@@ -120,7 +121,7 @@ function App() {
       const month = today.getMonth() + 1;
       const year = today.getFullYear();
       const response = await axios.get(
-        `http://localhost:5000/api/attendance/employee/${user.userId}?month=${month}&year=${year}`,
+        `${API_URL}/api/attendance/employee/${user.userId}?month=${month}&year=${year}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

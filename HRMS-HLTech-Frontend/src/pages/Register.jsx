@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/authHooks';
 import toast from 'react-hot-toast';
+const API_URL = import.meta.env.VITE_API_URL;
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -62,7 +63,7 @@ function Register() {
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
         <div className="flex items-center space-x-2 mb-6">
           <img
-            src="http://storageserver.hltechindia.com/uploads/HL Tech Website/Logos/1751354137066-666021738.png"
+            src={`${API_URL}/uploads/HL Tech Website/Logos/1751354137066-666021738.png`}
             alt="HL Tech Logo"
             className="h-12 w-auto"
             onError={(e) => {

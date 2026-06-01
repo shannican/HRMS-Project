@@ -4,6 +4,7 @@ import { useAuth } from '../../context/authHooks';
 import AddEmployeeModal from './AddEmployeeModal';
 import EditEmployeeModal from './EditEmployeeModal';
 import EmployeeDetailsModal from './EmployeeDetailsModal';
+const API_URL = import.meta.env.VITE_API_URL;
 
 function AddEmployees() {
   const { user } = useAuth();
@@ -78,7 +79,7 @@ function AddEmployees() {
         controller.abort();
       }, 60000);
 
-      const url = `http://localhost:5000/api/users?page=${page}&limit=10&search=${searchQuery}`;
+      const url = `${API_URL}/users?page=${page}&limit=10&search=${searchQuery}`;
       console.log('Fetching from URL:', url);
 
       const response = await fetch(url, {
@@ -256,7 +257,7 @@ function AddEmployees() {
         controller.abort();
       }, 60000);
 
-      const url = 'http://localhost:5000/api/add-employee';
+      const url = `${API_URL}/api/add-employee`;
       console.log('Adding employee with URL:', url);
       console.log('Add payload:', JSON.stringify(formattedEmployee, null, 2));
 

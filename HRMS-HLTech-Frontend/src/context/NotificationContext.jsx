@@ -2,6 +2,8 @@ import React, { createContext, useContext, useState, useEffect, useCallback, use
 import { io } from 'socket.io-client';
 import { useAuth } from './authHooks';
 import toast from 'react-hot-toast';
+const API_URL = import.meta.env.VITE_API_URL;
+
 
 const NotificationContext = createContext();
 
@@ -32,7 +34,7 @@ export const NotificationProvider = ({ children }) => {
         throw new Error('No token found for user');
       }
 
-      const response = await fetch('http://localhost:5000/api/notifications', {
+      const response = await fetch(`${API_URL}/api/notifications`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -68,7 +70,7 @@ export const NotificationProvider = ({ children }) => {
         throw new Error('No token found for user');
       }
 
-      const response = await fetch(`http://localhost:5000/api/notifications/${id}/read`, {
+      const response = await fetch(`${API_URL}/api/notifications/${id}/read`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -105,7 +107,7 @@ export const NotificationProvider = ({ children }) => {
         throw new Error('No token found for user');
       }
 
-      const response = await fetch('http://localhost:5000/api/notifications/read-all', {
+      const response = await fetch(`${API_URL}/api/notifications/read-all`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -144,7 +146,7 @@ export const NotificationProvider = ({ children }) => {
       return;
     }
 
-    const newSocket = io('http://localhost:5000', {
+    const newSocket = io(`${API_URL}`, {
       auth: { token },
       query: { userId: user.userId },
       transports: ['websocket'], // Force WebSocket transport

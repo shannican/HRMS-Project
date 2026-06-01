@@ -8,6 +8,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Title, Tooltip, Legend);
+const API_URL = import.meta.env.VITE_API_URL;
 
 function AdminDashboard() {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ function AdminDashboard() {
   const [modalData, setModalData] = useState([]); // Data to display in the modal
   const [modalError, setModalError] = useState(null); // Error message for modal
 
-  const API_BASE_URL = 'http://localhost:5000/api';
+  // const API_BASE_URL = 'http://localhost:5000/api';
   const getAuthToken = () => localStorage.getItem('token');
 
   // Retry function for API calls
@@ -68,7 +69,7 @@ function AdminDashboard() {
         // Fetch Employees
         let employeesResponse;
         try {
-          employeesResponse = await retryFetch(`${API_BASE_URL}/users`, { headers });
+          employeesResponse = await retryFetch(`${API_URL}/users`, { headers });
         } catch (err) {
           console.warn('Employees fetch failed, using defaults:', err);
           employeesResponse = { data: { totalEmployees: 0, employees: [] } };
@@ -78,7 +79,7 @@ function AdminDashboard() {
         // Fetch Upcoming Events (Birthdays and Anniversaries)
         let upcomingEventsResponse;
         try {
-          upcomingEventsResponse = await retryFetch(`${API_BASE_URL}/upcoming-events`, { headers });
+          upcomingEventsResponse = await retryFetch(`${API_URL}/upcoming-events`, { headers });
           console.log('Upcoming Events Response:', upcomingEventsResponse.data);
         } catch (err) {
           console.error('Failed to fetch upcoming events after retries:', {
@@ -100,7 +101,7 @@ function AdminDashboard() {
         let attendanceResponse;
         try {
           attendanceResponse = await retryFetch(
-            `${API_BASE_URL}/attendance/stats/${employeesResponse.data.employees[0]?._id || 'default'}`,
+            `${API_URL}/attendance/stats/${employeesResponse.data.employees[0]?._id || 'default'}`,
             { headers, params: { month: currentMonth, year: currentYear } }
           );
         } catch (err) {
@@ -113,7 +114,7 @@ function AdminDashboard() {
         // Fetch Leave Requests
         let leaveResponse;
         try {
-          leaveResponse = await retryFetch(`${API_BASE_URL}/leave`, {
+          leaveResponse = await retryFetch(`${API_URL}/leave`, {
             headers,
             params: { status: 'Pending' },
           });
@@ -128,7 +129,7 @@ function AdminDashboard() {
         const endOfMonth = moment().endOf('month').toDate();
         let payrollResponse;
         try {
-          payrollResponse = await retryFetch(`${API_BASE_URL}/payroll/records`, {
+          payrollResponse = await retryFetch(`${API_URL}/payroll/records`, {
             headers,
             params: { periodStart: startOfMonth, periodEnd: endOfMonth },
           });
@@ -141,7 +142,7 @@ function AdminDashboard() {
         // Fetch Job Postings
         let jobsResponse;
         try {
-          jobsResponse = await retryFetch(`${API_BASE_URL}/jobs`, { headers });
+          jobsResponse = await retryFetch(`${API_URL}/jobs`, { headers });
         } catch (err) {
           console.warn('Jobs fetch failed, using default:', err);
           jobsResponse = { data: [] };
@@ -151,7 +152,7 @@ function AdminDashboard() {
         // Fetch KYC Verifications
         let kycResponse;
         try {
-          kycResponse = await retryFetch(`${API_BASE_URL}/kyc/pending`, { headers });
+          kycResponse = await retryFetch(`${API_URL}/kyc/pending`, { headers });
         } catch (err) {
           console.warn('KYC fetch failed, using default:', err);
           kycResponse = { data: [] };
@@ -161,7 +162,7 @@ function AdminDashboard() {
         // Fetch Assessments
         let assessmentsResponse;
         try {
-          assessmentsResponse = await retryFetch(`${API_BASE_URL}/assessments/results`, { headers });
+          assessmentsResponse = await retryFetch(`${API_URL}/assessments/results`, { headers });
         } catch (err) {
           console.warn('Assessments fetch failed, using default:', err);
           assessmentsResponse = { data: [] };
@@ -171,7 +172,7 @@ function AdminDashboard() {
         // Fetch Notifications
         let notificationsResponse;
         try {
-          notificationsResponse = await retryFetch(`${API_BASE_URL}/notifications`, { headers });
+          notificationsResponse = await retryFetch(`${API_URL}/notifications`, { headers });
         } catch (err) {
           console.warn('Notifications fetch failed, using default:', err);
           notificationsResponse = { data: [] };

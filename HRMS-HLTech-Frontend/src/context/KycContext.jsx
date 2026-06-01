@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "../utils/axiosInstance";
 import { useAuth } from "../context/authHooks";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const KycContext = createContext();
 
@@ -26,7 +27,7 @@ export const KycProvider = ({ children }) => {
           return;
         }
 
-        const response = await axios.get(`http://localhost:5000/api/kyc/status/${user.userId}`, {
+        const response = await axios.get(`${API_URL}/api/kyc/status/${user.userId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setKycStatus(response.data.status || "Pending");
